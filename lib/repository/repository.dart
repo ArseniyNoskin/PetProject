@@ -8,18 +8,18 @@ class UserRepository{
     await Future.delayed(const Duration(seconds: 2));
 
     if(login == 'Arsenio'){
-      return RepositoryResult(success: UserDataModel(null, 'arsenio@gmail.com', 'Arsenio', 19), error: null);
+      return RepositoryResult(success: UserDataModel('arsenio@gmail.com', 'Arsenio', 19), error: null);
     }else{
-      return RepositoryResult(success: UserDataModel('Error username', null, null, null), error: 'invalid username');
+      return RepositoryResult(success: UserDataModel(null, null, null), error: 'invalid username');
     }
   }
 
   Future<RepositoryResult> register(String email, String username, String password, String passwordRepeat) async{
     await Future.delayed(const Duration(seconds: 2));
     if (password == passwordRepeat){
-      return RepositoryResult(success: UserDataModel(null, email, username, 19), error: null);
+      return RepositoryResult(success: UserDataModel(email, username, 19), error: null);
     }else{
-      return RepositoryResult(success: UserDataModel('Error password', null, null, null), error: 'password don`t match');
+      return RepositoryResult(success: UserDataModel(null, null, null), error: 'password don`t match');
     }
   }
 }

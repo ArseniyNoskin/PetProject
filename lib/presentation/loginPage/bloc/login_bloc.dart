@@ -13,7 +13,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       if (kDebugMode) {
         print('HERE');
       }
-      emit(state.copyWith(username: event.username));
+      emit(state.copyWith(username: event.username, formStatus: const InitialFormStatus()));
     });
 
     on<LoginPasswordChanged>((event, emit) {
@@ -36,7 +36,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       }
 
       var result = await userRepository?.login(event.login!, event.password!);
-      if (result!.error!.isEmpty) {
+      print('state = ${result!.error}');
+      if (result.error == null) {
         if (kDebugMode) {
           print('fail');
         }
