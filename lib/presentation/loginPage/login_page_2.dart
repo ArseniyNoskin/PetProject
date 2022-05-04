@@ -17,7 +17,7 @@ class LoginView extends StatelessWidget {
     return Scaffold(
       body: BlocProvider(
         create: (context) => LoginBloc(
-          authRepository: context.read<AuthRepository>(),
+          userRepository: context.read<UserRepository>(),
         ),
         child: _loginForm(context),
       ),
@@ -107,10 +107,6 @@ class LoginView extends StatelessWidget {
     return TextButton(
       onPressed: (){
         myOnClick();
-        /*Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => ForgotPasswordView()),
-        );*/
       },
       child: const Text(
         'Forgot Password',

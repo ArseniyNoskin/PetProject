@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
         initialRoute: AppRoutes.login,
         routes: {
           AppRoutes.login: (context) => RepositoryProvider(
-                create: (context) => AuthRepository(),
+                create: (context) => UserRepository(),
                 child: LoginView(),
               ),
           AppRoutes.forgotPass: (context) => ForgotPasswordView(),

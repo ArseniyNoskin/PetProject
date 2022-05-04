@@ -1,9 +1,9 @@
 abstract class RegisterEvent{}
 
-class EmailUsersChanged extends RegisterEvent{
+class RegisterEmailChanged extends RegisterEvent{
   final String? email;
 
-  EmailUsersChanged({this.email});
+  RegisterEmailChanged({this.email});
 }
 
 class RegisterUsernameChanged extends RegisterEvent{

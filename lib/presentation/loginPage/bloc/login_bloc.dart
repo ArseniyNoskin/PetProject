@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_project/presentation/form_submission_status.dart';
@@ -38,12 +35,15 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         return;
       }
 
-      var result = await userRepository?.login(event.login!, event.password ?? 'ss');
-      if (result!.errorMessage!.isEmpty) {
-        print('fail');
+      var result = await userRepository?.login(event.login!, event.password!);
+      if (result!.error!.isEmpty) {
+        if (kDebugMode) {
+          print('fail');
+        }
         emit(LoginState(formStatus: SubmissionSuccess()));
       } else {
-        emit(LoginState(formStatus: SubmissionFailed(Exception(result.errorMessage))));
+        emit(LoginState(formStatus: SubmissionFailed(Exception(result.error))));
       }
     });
   }
+}
