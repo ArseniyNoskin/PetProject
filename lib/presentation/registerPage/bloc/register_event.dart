@@ -24,11 +24,11 @@ class RegisterPasswordRepeatChanged extends RegisterEvent{
   RegisterPasswordRepeatChanged({this.passwordRepeat});
 }
 
-class RegisterSubmitted extends RegisterEvent{
-  final String? email;
-  final String? username;
-  final String? password;
-  final String? passwordRepeat;
+class RegisterButtonClickEvent extends RegisterEvent{
+  final String? rEmail;
+  final String? rUsername;
+  final String? rPassword;
+  final String? rPasswordRepeat;
 
-  RegisterSubmitted({this.email, this.username, this.password, this.passwordRepeat});
+  RegisterButtonClickEvent(this.rEmail, this.rUsername, this.rPassword, this.rPasswordRepeat);
 }

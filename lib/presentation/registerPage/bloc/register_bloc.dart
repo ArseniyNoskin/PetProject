@@ -24,30 +24,30 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState>{
       emit(state.copyWith(passwordRepeat: event.passwordRepeat));
     });
 
-    on<RegisterSubmitted>((event, emit) async {
-      emit(state.copyWith(formStatus: FormSubmitting()));
-      await Future.delayed(const Duration(seconds: 2));
+    on<RegisterButtonClickEvent>((event, emit) async {
+      //emit(state.copyWith(formStatus: FormSubmitting()));
+      //await Future.delayed(const Duration(seconds: 2));
 
-      if (event.username == null) {
-        emit(RegisterState(formStatus: SubmissionFailed(Exception('Username is empty'))));
-        return;
-      }
-      if (event.email == null) {
+      if (event.rEmail == '') {
         emit(RegisterState(formStatus: SubmissionFailed(Exception('Email is empty'))));
         return;
       }
-      if (event.password == null) {
+      if (event.rUsername == '') {
+        emit(RegisterState(formStatus: SubmissionFailed(Exception('Username is empty'))));
+        return;
+      }
+      if (event.rPassword == '') {
         emit(RegisterState(formStatus: SubmissionFailed(Exception('Password is empty'))));
         return;
       }
-      if (event.passwordRepeat == null) {
+      if (event.rPasswordRepeat == '') {
         emit(RegisterState(formStatus: SubmissionFailed(Exception('Repeat password is empty'))));
         return;
       }
 
-      var result = await userRepository?.register(event.email!, event.username!, event.password!, event.passwordRepeat!);
+      var result = await userRepository?.register(event.rEmail!, event.rUsername!, event.rPassword!, event.rPasswordRepeat!);
 
-      if (result!.error!.isEmpty){
+      if (result!.error == null){
         emit(RegisterState(formStatus: SubmissionSuccess()));
       }else{
         print(result.error);

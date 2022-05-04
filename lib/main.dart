@@ -16,17 +16,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        initialRoute: AppRoutes.login,
-        routes: {
-          AppRoutes.login: (context) => RepositoryProvider(
-                create: (context) => UserRepository(),
-                child: LoginView(),
-              ),
-          AppRoutes.forgotPass: (context) => ForgotPasswordView(),
-          AppRoutes.newPass: (context) => NewPasswordView(),
-          AppRoutes.codeEntry: (context) => CodeEntryView(),
-          AppRoutes.register: (context) => RegisterView(),
-        },
+      initialRoute: AppRoutes.login,
+      routes: {
+        AppRoutes.login: (context) => RepositoryProvider(
+              create: (context) => UserRepository(),
+              child: LoginView(),
+            ),
+        AppRoutes.forgotPass: (context) => ForgotPasswordView(),
+        AppRoutes.newPass: (context) => NewPasswordView(),
+        AppRoutes.codeEntry: (context) => CodeEntryView(),
+        AppRoutes.register: (context) => RepositoryProvider(
+              create: (context) => UserRepository(),
+              child: RegisterView(),
+            ),
+      },
     );
   }
 }

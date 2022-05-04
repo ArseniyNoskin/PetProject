@@ -1,106 +1,147 @@
 import 'package:flutter/material.dart';
-import 'package:new_project/presentation/loginPage/login_page_2.dart';
-import 'package:new_project/presentation/routes/appRoutes.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_project/presentation/registerPage/bloc/register_event.dart';
+import 'package:new_project/presentation/registerPage/bloc/register_state.dart';
+import 'package:new_project/repository/repository.dart';
+
+import '../form_submission_status.dart';
+import '../routes/appRoutes.dart';
+import 'bloc/register_bloc.dart';
 
 class RegisterView extends StatelessWidget {
   final _formKey = GlobalKey<FormState>();
 
   RegisterView({Key? key}) : super(key: key);
 
+  final emailController = TextEditingController();
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
+  final passwordRepeatController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _registerForm(context),
+      body: BlocProvider(
+        create: (context) => RegisterBloc(
+          userRepository: context.read<UserRepository>(),
+        ),
+        child: _registerForm(context),
+      ),
     );
   }
 
-  Widget _registerForm(BuildContext context){
-    return Form(
-      key: _formKey,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _emailField(),
-            const SizedBox(height: 20,),
-            _loginField(),
-            const SizedBox(height: 20,),
-            _passwordField(),
-            const SizedBox(height: 20,),
-            _repeatPasswordField(),
-            const SizedBox(height: 20,),
-            _registerButton(myOnClick: (){
-              Navigator.pushNamed(context, AppRoutes.login);
-            }),
-          ],
+  Widget _registerForm(BuildContext context) {
+    return BlocListener<RegisterBloc, RegisterState>(
+      listener: (context, state) {
+        final formStatus = state.formStatus;
+
+        print('state = ${formStatus.toString()}');
+
+        if (formStatus is SubmissionFailed) {
+          _showSnackBar(context, formStatus.exception.toString());
+        }
+        if (formStatus is SubmissionSuccess) {
+          Navigator.pushNamed(
+            context,
+            AppRoutes.login,
+          );
+        }
+      },
+      child: Form(
+        key: _formKey,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _emailField(),
+              const SizedBox(
+                height: 20,
+              ),
+              _loginField(),
+              const SizedBox(
+                height: 20,
+              ),
+              _passwordField(),
+              const SizedBox(
+                height: 20,
+              ),
+              _repeatPasswordField(),
+              const SizedBox(
+                height: 20,
+              ),
+              _registerButton(),
+            ],
+          ),
         ),
       ),
     );
   }
 
   Widget _emailField() {
-    return const TextField(
-      decoration: InputDecoration(
+    return TextField(
+      decoration: const InputDecoration(
         icon: Icon(Icons.email),
         border: OutlineInputBorder(),
         labelText: 'Email',
         hintText: 'Enter your valid email',
       ),
+      controller: emailController,
     );
   }
 
   Widget _loginField() {
-    return const TextField(
-      decoration: InputDecoration(
+    return TextField(
+      decoration: const InputDecoration(
         icon: Icon(Icons.person),
         border: OutlineInputBorder(),
         labelText: 'Login',
         hintText: 'Enter your secure login',
       ),
+      controller: usernameController,
     );
   }
 
   Widget _passwordField() {
-    return const TextField(
-      decoration: InputDecoration(
+    return TextField(
+      decoration: const InputDecoration(
         icon: Icon(Icons.security),
         border: OutlineInputBorder(),
         labelText: 'New password',
         hintText: 'Enter your secure password',
       ),
+      controller: passwordController,
     );
   }
 
   Widget _repeatPasswordField() {
-    return const TextField(
-      decoration: InputDecoration(
+    return TextField(
+      decoration: const InputDecoration(
         icon: Icon(Icons.security),
         border: OutlineInputBorder(),
         labelText: 'Repeat password',
         hintText: 'Repeat your password',
       ),
+      controller: passwordRepeatController,
     );
   }
 
-  Widget _registerButton({required void Function() myOnClick}) {
-    return Container(
-      height: 50,
-      width: 250,
-      decoration: BoxDecoration(
-        color: Colors.blueAccent,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: TextButton(
-        onPressed: (){
-          myOnClick();
-        },
-        child: const Text(
-          'Register',
-          style: TextStyle(color: Colors.white, fontSize: 25),
-        ),
-      ),
-    );
+  Widget _registerButton() {
+    return BlocBuilder<RegisterBloc, RegisterState>(builder: (context, state) {
+      return state.formStatus is FormSubmitting
+          ? const CircularProgressIndicator()
+          : ElevatedButton(
+              onPressed: () {
+                context.read<RegisterBloc>().add(RegisterButtonClickEvent(emailController.text, usernameController.text,
+                    passwordController.text, passwordRepeatController.text));
+              },
+              child: const Text('Register'),
+            );
+    });
+  }
+
+  void _showSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
