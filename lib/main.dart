@@ -13,8 +13,11 @@ void main() => runApp(const MyApp());
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
+    final UserRepository userRepository = UserRepository();
+
     return MaterialApp(
       initialRoute: AppRoutes.login,
       routes: {
