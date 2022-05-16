@@ -8,9 +8,10 @@ import 'bloc/login_event.dart';
 import 'bloc/login_state.dart';
 
 class LoginView extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
-
   LoginView({Key? key}) : super(key: key);
+
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,6 @@ class LoginView extends StatelessWidget {
           }
         },
         child: Form(
-          key: _formKey,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 40),
             child: Column(
@@ -46,22 +46,19 @@ class LoginView extends StatelessWidget {
                 const SizedBox(
                   height: 150,
                 ),
-                _usernameField(),
+                _emailField(),
                 _passwordField(),
                 const SizedBox(
                   height: 20,
                 ),
-                _forgotPasTextBut(myOnClick:() {
-                  Navigator.pushNamed(
-                      context,
-                      AppRoutes.forgotPass
-                  );
+                _forgotPasTextBut(myOnClick: () {
+                  Navigator.pushNamed(context, AppRoutes.forgotPass);
                 }),
                 _loginButton(),
                 const SizedBox(
                   height: 300,
                 ),
-                _registerTextBut(myOnClick: (){
+                _registerTextBut(myOnClick: () {
                   Navigator.pushNamed(context, AppRoutes.register);
                 }),
               ],
@@ -70,18 +67,14 @@ class LoginView extends StatelessWidget {
         ));
   }
 
-  Widget _usernameField() {
+  Widget _emailField() {
     return BlocBuilder<LoginBloc, LoginState>(builder: (context, state) {
       return TextFormField(
         decoration: const InputDecoration(
-          icon: Icon(Icons.person),
-          hintText: 'Username',
+          icon: Icon(Icons.email),
+          hintText: 'Email',
         ),
-        validator: (value) =>
-            state.isValidUsername ? null : 'Username is too short',
-        onChanged: (value) => context.read<LoginBloc>().add(
-              LoginUsernameChanged(username: value),
-            ),
+        controller: emailController,
       );
     });
   }
@@ -94,18 +87,14 @@ class LoginView extends StatelessWidget {
           icon: Icon(Icons.security),
           hintText: 'Password',
         ),
-        validator: (value) =>
-            state.isValidPassword ? null : 'Password is too short',
-        onChanged: (value) => context.read<LoginBloc>().add(
-              LoginPasswordChanged(password: value),
-            ),
+        controller: passwordController,
       );
     });
   }
 
-  Widget _forgotPasTextBut({required Null Function() myOnClick} ){
+  Widget _forgotPasTextBut({required Null Function() myOnClick}) {
     return TextButton(
-      onPressed: (){
+      onPressed: () {
         myOnClick();
       },
       child: const Text(
@@ -121,14 +110,14 @@ class LoginView extends StatelessWidget {
           ? const CircularProgressIndicator()
           : ElevatedButton(
               onPressed: () {
-                context.read<LoginBloc>().add(LoginSubmitted(state.username, state.password));
+                context.read<LoginBloc>().add(LoginSubmitted(emailController.text, passwordController.text));
               },
               child: const Text('Login'),
             );
     });
   }
 
-  Widget _registerTextBut({required void Function() myOnClick}){
+  Widget _registerTextBut({required void Function() myOnClick}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -137,7 +126,7 @@ class LoginView extends StatelessWidget {
           style: TextStyle(color: Colors.black, fontSize: 15),
         ),
         TextButton(
-          onPressed: (){
+          onPressed: () {
             myOnClick();
           },
           child: const Text(

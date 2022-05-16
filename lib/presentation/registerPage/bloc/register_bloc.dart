@@ -25,9 +25,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState>{
     });
 
     on<RegisterButtonClickEvent>((event, emit) async {
-      //emit(state.copyWith(formStatus: FormSubmitting()));
-      //await Future.delayed(const Duration(seconds: 2));
-
       if (event.rEmail == '') {
         emit(RegisterState(formStatus: SubmissionFailed(Exception('Email is empty'))));
         return;
@@ -50,11 +47,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState>{
       if (result!.error == null){
         emit(RegisterState(formStatus: SubmissionSuccess()));
       }else{
-        print(result.error);
         emit(RegisterState(formStatus: SubmissionFailed(Exception(result.error))));
       }
-
-
     });
   }
 

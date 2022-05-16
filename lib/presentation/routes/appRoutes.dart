@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class AppRoutes{
   static var login = '/login_view';
   static var register = '/register_view';

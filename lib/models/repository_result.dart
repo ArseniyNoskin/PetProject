@@ -1,8 +1,6 @@
-import 'package:new_project/models/user_data_model.dart';
-
-class RepositoryResult{
+class RepositoryResult<T>{
   String? error;
-  UserDataModel? success;
+  T success;
 
-  RepositoryResult({this.success, this.error});
+  RepositoryResult({required this.success, this.error});
 }

@@ -1,7 +1,7 @@
 class UserDataModel {
   String? email;
-  String? name;
+  String? username;
   int? age;
 
-  UserDataModel(this.email, this.name, this.age);
+  UserDataModel(this.email, this.username, this.age);
 }

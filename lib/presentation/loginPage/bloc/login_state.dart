@@ -1,8 +1,8 @@
 import 'package:new_project/presentation/form_submission_status.dart';
 
 class LoginState{
-  final String username;
-  bool get isValidUsername => username.length>3;
+  final String email;
+  bool get isValidUsername => email.length>3;
 
   final String password;
   bool get isValidPassword => password.length>6;
@@ -10,7 +10,7 @@ class LoginState{
   final FormSubmissionStatus formStatus;
 
   LoginState({
-    this.username = '',
+    this.email = '',
     this.password = '',
     this.formStatus = const InitialFormStatus(),
   });
@@ -21,7 +21,7 @@ class LoginState{
     FormSubmissionStatus? formStatus,
   }) {
     return LoginState(
-      username: username ?? this.username,
+      email: username ?? this.email,
       password: password ?? this.password,
       formStatus: formStatus ?? this.formStatus,
     );

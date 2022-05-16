@@ -1,82 +1,81 @@
 import 'package:flutter/material.dart';
-import 'package:new_project/presentation/codeEntryPage/code_entry_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:new_project/presentation/forgotPasswordPage/bloc/forgot_pass_bloc.dart';
+import 'package:new_project/presentation/forgotPasswordPage/bloc/forgot_pass_event.dart';
+import 'package:new_project/presentation/forgotPasswordPage/bloc/forgot_pass_state.dart';
+import 'package:new_project/presentation/form_submission_status.dart';
 import 'package:new_project/presentation/routes/appRoutes.dart';
+import 'package:new_project/repository/repository.dart';
 
 class ForgotPasswordView extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
-
   ForgotPasswordView({Key? key}) : super(key: key);
+
+  final emailController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _forgotPasswordForm(context),
+      body: BlocProvider(
+        create: (context) => ForgotPassBloc(userRepository: context.read<UserRepository>()),
+        child: _forgotPasswordForm(context),
+      ),
     );
   }
 
-  Widget _forgotPasswordForm(BuildContext context){
-    return Form(
-      key: _formKey,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 40),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _emailField(),
-            const SizedBox(height: 20,),
-            _loginField(),
-            const SizedBox(height: 20,),
-            _sendCodeButton(myOnClick: () {
-              Navigator.pushNamed(
-                  context,
-                  AppRoutes.codeEntry
-              );
-            })
-          ],
+  Widget _forgotPasswordForm(BuildContext context) {
+    return BlocListener<ForgotPassBloc, ForgotPassState>(
+      listener: (context, state) {
+        final formStatus = state.formStatus;
+        if (formStatus is SubmissionFailed) {
+          _showSnackBar(context, formStatus.exception.toString());
+        } else {
+          Navigator.pushNamed(context, AppRoutes.newPass, arguments: emailController.text);
+        }
+      },
+      child: Form(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _emailField(),
+              const SizedBox(
+                height: 20,
+              ),
+              _sendCodeButton()
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget _emailField(){
-    return const TextField(
-      decoration: InputDecoration(
+  Widget _emailField() {
+    return TextField(
+      decoration: const InputDecoration(
         icon: Icon(Icons.email),
         border: OutlineInputBorder(),
         labelText: 'Email',
         hintText: 'Enter your valid email',
       ),
+      controller: emailController,
     );
   }
 
-  Widget _loginField(){
-    return const TextField(
-      decoration: InputDecoration(
-          icon: Icon(Icons.person),
-          border: OutlineInputBorder(),
-          labelText: 'Login',
-          hintText: 'Enter your valid login'
-      ),
-    );
+  Widget _sendCodeButton() {
+    return BlocBuilder<ForgotPassBloc, ForgotPassState>(builder: (context, state) {
+      return state.formStatus is FormSubmitting
+          ? const CircularProgressIndicator()
+          : ElevatedButton(
+              onPressed: () {
+                context.read<ForgotPassBloc>().add(ForgotButtonClickEvent(emailController.text));
+              },
+              child: const Text('Enter'));
+    });
   }
 
-  Widget _sendCodeButton({required Null Function() myOnClick}){
-    return Container(
-      height: 50,
-      width: 250,
-      decoration: BoxDecoration(
-        color: Colors.blueAccent,
-        borderRadius: BorderRadius.circular(20),
-      ),
-      child: TextButton(
-        onPressed: (){
-          myOnClick();
-        },
-        child: const Text(
-          'Send code',
-          style: TextStyle(color: Colors.white, fontSize: 25),
-        ),
-      ),
-    );
+  void _showSnackBar(BuildContext context, String message) {
+    final snackBar = SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }

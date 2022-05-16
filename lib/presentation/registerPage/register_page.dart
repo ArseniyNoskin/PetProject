@@ -35,8 +35,6 @@ class RegisterView extends StatelessWidget {
       listener: (context, state) {
         final formStatus = state.formStatus;
 
-        print('state = ${formStatus.toString()}');
-
         if (formStatus is SubmissionFailed) {
           _showSnackBar(context, formStatus.exception.toString());
         }
@@ -110,6 +108,7 @@ class RegisterView extends StatelessWidget {
         labelText: 'New password',
         hintText: 'Enter your secure password',
       ),
+      obscureText: true,
       controller: passwordController,
     );
   }
@@ -122,6 +121,7 @@ class RegisterView extends StatelessWidget {
         labelText: 'Repeat password',
         hintText: 'Repeat your password',
       ),
+      obscureText: true,
       controller: passwordRepeatController,
     );
   }
