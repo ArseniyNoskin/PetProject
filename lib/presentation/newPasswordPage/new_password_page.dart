@@ -9,7 +9,7 @@ import 'bloc/new_pass_bloc.dart';
 import 'bloc/new_pass_state.dart';
 
 class NewPasswordView extends StatelessWidget {
-  var email = "";
+  var email = '';
 
   final passwordController = TextEditingController();
   final passwordRepeatController = TextEditingController();
@@ -68,7 +68,8 @@ class NewPasswordView extends StatelessWidget {
   Widget _titleText() {
     return const Text(
       'Введите новый пароль',
-      style: TextStyle(color: Colors.black, fontSize: 20),
+      style: TextStyle(color: Colors.black, fontSize: 20, fontFamily: 'Times New Roman'),
+      textAlign: TextAlign.center,
     );
   }
 

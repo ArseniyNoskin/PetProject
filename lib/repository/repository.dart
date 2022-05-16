@@ -10,7 +10,6 @@ class UserRepository {
   Future<RepositoryResult> updatePass(String email, String password, String passwordRepeat) async {
     final database = await $FloorAppDatabase.databaseBuilder(nameDatabase).build();
     final personDao = database.personDao;
-    final result = await personDao.findPersonByEmail(email);
     await Future.delayed(const Duration(seconds: 1));
     if (password == passwordRepeat) {
       await personDao.updatePassword(email, password);
