@@ -1,8 +1,9 @@
-import 'package:new_project/models/repository_result.dart';
-import 'package:new_project/models/user_data_model.dart';
 
-import '../database/database.dart';
-import '../database/entity/person.dart';
+import 'package:new_project/data/models/user_data_model.dart';
+import 'package:new_project/database/database.dart';
+
+import '../../database/entity/person.dart';
+import '../models/repository_result.dart';
 
 class UserRepository {
   String nameDatabase = 'my_test_database.db';

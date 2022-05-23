@@ -2,14 +2,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_project/presentation/form_submission_status.dart';
 import 'package:new_project/presentation/loginPage/bloc/login_event.dart';
 import 'package:new_project/presentation/loginPage/bloc/login_state.dart';
-import 'package:new_project/repository/repository.dart';
+
+import '../../../data/repository/repository.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final UserRepository? userRepository;
 
   LoginBloc({this.userRepository}) : super(LoginState()) {
     on<LoginEmailChanged>((event, emit) {
-      emit(state.copyWith(username: event.email, formStatus: const InitialFormStatus()));
+      emit(state.copyWith(email: event.email, formStatus: const InitialFormStatus()));
     });
 
     on<LoginPasswordChanged>((event, emit) {

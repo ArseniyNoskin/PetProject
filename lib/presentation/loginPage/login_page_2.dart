@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_project/presentation/routes/appRoutes.dart';
-import 'package:new_project/repository/repository.dart';
+import '../../data/repository/repository.dart';
 import '../form_submission_status.dart';
 import 'bloc/login_bloc.dart';
 import 'bloc/login_event.dart';
@@ -32,9 +32,8 @@ class LoginView extends StatelessWidget {
           if (formStatus is SubmissionFailed) {
             _showSnackBar(context, formStatus.exception.toString());
           }
-
           if (formStatus is SubmissionSuccess) {
-            _showSnackBar(context, 'Hi Arsen');
+            Navigator.pushNamed(context, AppRoutes.listHeroes);
           }
         },
         child: Form(
@@ -110,7 +109,9 @@ class LoginView extends StatelessWidget {
           ? const CircularProgressIndicator()
           : ElevatedButton(
               onPressed: () {
-                context.read<LoginBloc>().add(LoginSubmitted(emailController.text, passwordController.text));
+                context
+                    .read<LoginBloc>()
+                    .add(LoginSubmitted(emailController.text.trim(), passwordController.text.trim()));
               },
               child: const Text('Login'),
             );

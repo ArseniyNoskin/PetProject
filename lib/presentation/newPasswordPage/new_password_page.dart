@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_project/presentation/form_submission_status.dart';
 import 'package:new_project/presentation/newPasswordPage/bloc/new_pass_event.dart';
 import 'package:new_project/presentation/routes/appRoutes.dart';
-import 'package:new_project/repository/repository.dart';
 
+import '../../data/repository/repository.dart';
 import 'bloc/new_pass_bloc.dart';
 import 'bloc/new_pass_state.dart';
 

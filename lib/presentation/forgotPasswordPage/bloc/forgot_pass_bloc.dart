@@ -1,8 +1,9 @@
 import 'package:new_project/presentation/forgotPasswordPage/bloc/forgot_pass_event.dart';
 import 'package:new_project/presentation/forgotPasswordPage/bloc/forgot_pass_state.dart';
 import 'package:new_project/presentation/form_submission_status.dart';
-import 'package:new_project/repository/repository.dart';
 import 'package:bloc/bloc.dart';
+
+import '../../../data/repository/repository.dart';
 
 class ForgotPassBloc extends Bloc<ForgotPassEvent, ForgotPassState> {
   final UserRepository? userRepository;

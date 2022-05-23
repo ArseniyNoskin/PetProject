@@ -5,7 +5,8 @@ import 'package:new_project/presentation/forgotPasswordPage/bloc/forgot_pass_eve
 import 'package:new_project/presentation/forgotPasswordPage/bloc/forgot_pass_state.dart';
 import 'package:new_project/presentation/form_submission_status.dart';
 import 'package:new_project/presentation/routes/appRoutes.dart';
-import 'package:new_project/repository/repository.dart';
+
+import '../../data/repository/repository.dart';
 
 class ForgotPasswordView extends StatelessWidget {
   ForgotPasswordView({Key? key}) : super(key: key);
@@ -29,7 +30,7 @@ class ForgotPasswordView extends StatelessWidget {
         if (formStatus is SubmissionFailed) {
           _showSnackBar(context, formStatus.exception.toString());
         } else {
-          Navigator.pushNamed(context, AppRoutes.newPass, arguments: emailController.text);
+          Navigator.pushNamed(context, AppRoutes.newPass, arguments: emailController.text.trim());
         }
       },
       child: Form(
@@ -68,7 +69,7 @@ class ForgotPasswordView extends StatelessWidget {
           ? const CircularProgressIndicator()
           : ElevatedButton(
               onPressed: () {
-                context.read<ForgotPassBloc>().add(ForgotButtonClickEvent(emailController.text));
+                context.read<ForgotPassBloc>().add(ForgotButtonClickEvent(emailController.text.trim()));
               },
               child: const Text('Enter'));
     });

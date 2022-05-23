@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_project/presentation/registerPage/bloc/register_event.dart';
 import 'package:new_project/presentation/registerPage/bloc/register_state.dart';
-import 'package:new_project/repository/repository.dart';
 
+import '../../data/repository/repository.dart';
 import '../form_submission_status.dart';
 import '../routes/appRoutes.dart';
 import 'bloc/register_bloc.dart';
@@ -132,8 +132,11 @@ class RegisterView extends StatelessWidget {
           ? const CircularProgressIndicator()
           : ElevatedButton(
               onPressed: () {
-                context.read<RegisterBloc>().add(RegisterButtonClickEvent(emailController.text, usernameController.text,
-                    passwordController.text, passwordRepeatController.text));
+                context.read<RegisterBloc>().add(RegisterButtonClickEvent(
+                    emailController.text.trim(),
+                    usernameController.text.trim(),
+                    passwordController.text.trim(),
+                    passwordRepeatController.text.trim()));
               },
               child: const Text('Register'),
             );

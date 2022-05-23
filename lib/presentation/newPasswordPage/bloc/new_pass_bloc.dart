@@ -2,7 +2,8 @@ import 'package:bloc/bloc.dart';
 import 'package:new_project/presentation/form_submission_status.dart';
 import 'package:new_project/presentation/newPasswordPage/bloc/new_pass_event.dart';
 import 'package:new_project/presentation/newPasswordPage/bloc/new_pass_state.dart';
-import 'package:new_project/repository/repository.dart';
+
+import '../../../data/repository/repository.dart';
 
 class NewPassBloc extends Bloc<NewPassEvent, NewPassState>{
   final UserRepository? userRepository;
