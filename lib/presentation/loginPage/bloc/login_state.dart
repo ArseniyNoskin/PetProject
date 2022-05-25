@@ -1,11 +1,13 @@
 import 'package:new_project/presentation/form_submission_status.dart';
 
-class LoginState{
+class LoginState {
   final String email;
-  bool get isValidUsername => email.length>3;
+
+  bool get isValidUsername => email.length > 3;
 
   final String password;
-  bool get isValidPassword => password.length>6;
+
+  bool get isValidPassword => password.length > 6;
 
   final FormSubmissionStatus formStatus;
 

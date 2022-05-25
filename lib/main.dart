@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:new_project/presentation/allHeroesPage/heroes_page.dart';
 import 'package:new_project/presentation/codeEntryPage/code_entry_page.dart';
 import 'package:new_project/presentation/forgotPasswordPage/forgot_password_page.dart';
+import 'package:new_project/presentation/heroInfo/hero_info_page.dart';
 import 'package:new_project/presentation/loginPage/login_page_2.dart';
 import 'package:new_project/presentation/newPasswordPage/new_password_page.dart';
 import 'package:new_project/presentation/registerPage/register_page.dart';
@@ -43,6 +44,10 @@ class MyApp extends StatelessWidget {
               create: (context) => DotaRepository(),
               child: ListHeroesView(),
             ),
+        AppRoutes.heroInfo: (context) => RepositoryProvider(
+          create: (context) => DotaRepository(),
+          child: HeroView(),
+        ),
       },
     );
   }

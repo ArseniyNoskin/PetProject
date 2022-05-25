@@ -5,4 +5,5 @@ class AppRoutes{
   static var codeEntry = '/code_entry';
   static var newPass = '/new_password';
   static var listHeroes = '/list_heroes';
+  static var heroInfo = '/dota_hero_info';
 }
