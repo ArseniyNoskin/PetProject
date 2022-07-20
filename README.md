@@ -5,7 +5,11 @@ Percapita application
 <details>
   <summary>Some screenshots</summary>
     <p align="center">
-      <img src="data/1.jpg" width="20%"/>
+      <img src="data/heroList.jpg" width="20%"/>
+      <img src="data/searchHeroList.jpg" width="20%"/>
+      <img src="data/heroInfo.jpg" width="20%"/>
+      <img src="data/abilityInfo.jpg" width="20%"/>
+      <img src="data/talentsTree.jpg" width="20%"/>
     </p>
 </details>
 
