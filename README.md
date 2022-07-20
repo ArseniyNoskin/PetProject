@@ -21,7 +21,7 @@
 * [Flutter](https://flutter.dev/) 100%,
 * [Flutter_Bloc](https://pub.dev/packages/flutter_bloc) 100%,
 
-* Presentation layer pattern - BLOCK
+* Presentation layer pattern - BLoC
 
 ### Libraries
 * DI
