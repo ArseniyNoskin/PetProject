@@ -2,8 +2,7 @@
 Percapita application
 
 ### Preview
-<details>
-  <summary>Some screenshots</summary>
+<summary>Some screenshots</summary>
     <p align="center">
       <img src="data/heroList.jpg" width="20%"/>
       <img src="data/searchHeroList.jpg" width="20%"/>
@@ -11,7 +10,6 @@ Percapita application
       <img src="data/abilityInfo.jpg" width="20%"/>
       <img src="data/talentsTree.jpg" width="20%"/>
     </p>
-</details>
 
 
 ### Architecture
