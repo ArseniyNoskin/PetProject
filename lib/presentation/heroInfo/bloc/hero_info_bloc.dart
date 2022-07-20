@@ -6,6 +6,7 @@ import 'package:new_project/presentation/heroInfo/bloc/hero_info_state.dart';
 
 class HeroInfoBloc extends Bloc<HeroInfoEvent, HeroInfoState> {
   final DotaRepository? dotaRepository;
+
   HeroInfoBloc({this.dotaRepository}) : super(HeroInfoState(hero: null)){
     on<LoadingScreen>((event, emit) async {
       var result = await dotaRepository?.fetchHeroById(event.id);

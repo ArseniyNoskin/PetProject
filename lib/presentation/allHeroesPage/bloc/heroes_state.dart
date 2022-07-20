@@ -6,5 +6,5 @@ class HeroState {
   final List<Heroes> heroList;
   final FormSubmissionStatus formStatus;
 
-  HeroState({required this.heroList, this.formStatus = const InitialFormStatus()});
+  HeroState({required this.heroList, this.formStatus = const FormSubmitting()});
 }

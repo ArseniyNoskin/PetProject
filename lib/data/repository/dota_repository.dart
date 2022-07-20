@@ -4,18 +4,16 @@ import 'package:new_project/data/models/heroesResponseDTO.dart';
 import 'package:new_project/data/models/repository_result.dart';
 
 class DotaRepository {
-  String url = 'https://www.dota2.com/datafeed';
-  String apiKey = '';
-  final dioClient = Dio();
+  final String _url = 'https://www.dota2.com/datafeed';
+  final _dioClient = Dio();
 
   Future<RepositoryResult> fetchAllHeroes() async {
     try {
-      Response response = await dioClient.get(
+      Response response = await _dioClient.get(
           'https://www.dota2.com/datafeed/herolist?language=english');
 
       var heroData = HeroesResponse.fromJson(response.data);
       var heroList = heroData.result?.data?.heroes;
-      print('list size = ${heroList?.length}');
       /*var heroList = (response.data as List)
           .map((jsonStr) => DotaHero.fromJson(jsonStr))
           .toList();
@@ -38,7 +36,7 @@ class DotaRepository {
 
   Future<RepositoryResult> fetchHeroById(int idHero) async {
     try {
-      Response response = await dioClient.get('$url/herodata', queryParameters: {'language': 'english','hero_id':idHero});
+      Response response = await _dioClient.get('$_url/herodata', queryParameters: {'language': 'english','hero_id':idHero});
 
       var heroResponse  = Welcome.fromJson(response.data);
       var hero = heroResponse.result.data.heroes.first;
