@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: AppRoutes.login,
+      initialRoute: AppRoutes.listHeroes,
       routes: {
         AppRoutes.login: (context) => RepositoryProvider(
               create: (context) => UserRepository(),
