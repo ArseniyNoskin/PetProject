@@ -30,6 +30,8 @@ dependencies:
   flutter:
     sdk: flutter
   floor:
+  sqflite:
+  floor_generator:
   http:
   flutter_bloc:
   dio:
