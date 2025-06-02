@@ -83,7 +83,7 @@ class _HeroViewState extends State<HeroView> {
                   _attributesHero(),
                   _statsHero(),
                   _abilitiesHero(),
-                  _talentsAndAghanimHero(),
+                  //_talentsAndAghanimHero(),
                 ],
               ),
             ));
@@ -815,7 +815,7 @@ class _HeroViewState extends State<HeroView> {
     }
   }
 
-  Widget _talentsAndAghanimHero() {
+  /*Widget _talentsAndAghanimHero() {
     return Container(
       padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
       child: Row(
@@ -828,9 +828,9 @@ class _HeroViewState extends State<HeroView> {
         ],
       ),
     );
-  }
+  }*/
 
-  Widget _talentsTree() {
+  /*Widget _talentsTree() {
     return Container(
       child: IconButton(
         onPressed: () {
@@ -842,9 +842,9 @@ class _HeroViewState extends State<HeroView> {
         ),
       ),
     );
-  }
+  }*/
 
-  _talentsInfo() {
+  /*_talentsInfo() {
     double widthPhone = MediaQuery.of(context).size.width;
     double heightPhone = MediaQuery.of(context).size.height;
     showDialog(
@@ -1395,9 +1395,9 @@ class _HeroViewState extends State<HeroView> {
             ),
           );
         });
-  }
+  }*/
 
-  Widget _aghanimScepter() {
+  /*Widget _aghanimScepter() {
     return Container(
       child: IconButton(
         onPressed: () {
@@ -1409,9 +1409,9 @@ class _HeroViewState extends State<HeroView> {
         ),
       ),
     );
-  }
+  }*/
 
-  Widget _aghanimShard() {
+  /*Widget _aghanimShard() {
     return Container(
       child: IconButton(
         onPressed: () {
@@ -1423,5 +1423,5 @@ class _HeroViewState extends State<HeroView> {
         ),
       ),
     );
-  }
+  }*/
 }

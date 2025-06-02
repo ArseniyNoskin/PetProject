@@ -7,7 +7,7 @@ import 'package:new_project/presentation/allHeroesPage/bloc/heroes_event.dart';
 import 'package:new_project/presentation/allHeroesPage/bloc/heroes_state.dart';
 import 'package:new_project/presentation/form_submission_status.dart';
 
-import '../../data/repository/dota_repository.dart';
+import 'package:new_project/data/repository/dota_repository.dart';
 import '../routes/appRoutes.dart';
 
 class ListHeroesView extends StatefulWidget {
@@ -108,7 +108,8 @@ class _ListHeroesViewState extends State<ListHeroesView> {
                     title: Row(
                       children: [
                         Image.network(
-                          'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${listHeroes2[index].name!.replaceAll('npc_dota_hero_', '')}.png',
+                          'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/'
+                              '${listHeroes2[index].name!.replaceAll('npc_dota_hero_', '')}.png',
                           height: 30,
                           width: 50,
                         ),

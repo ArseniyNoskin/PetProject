@@ -93,7 +93,7 @@ class DotaHero {
     required this.maxMana,
     required this.manaRegen,
     required this.abilities,
-    required this.talents,
+    //required this.talents,
   });
 
   int id;
@@ -129,15 +129,15 @@ class DotaHero {
   int maxMana;
   double manaRegen;
   List<Ability> abilities;
-  List<Ability> talents;
+  //List<Ability> talents;
 
   factory DotaHero.fromJson(Map<String, dynamic> json) {
     var abilit = List<Ability>.from(json["abilities"].map((x) => Ability.fromJson(x, null, false)));
     var listAllSpecialValues = <SpecialValue>[];
     for (var element in abilit) {
-      listAllSpecialValues.addAll(element.specialValues);
+      listAllSpecialValues.addAll(element.specialValues as Iterable<SpecialValue>);
     }
-    var listAllBonuses = <Bonus>[];
+    List<Bonus>? listAllBonuses = <Bonus>[];
 
     for (var element in listAllSpecialValues) {
       if (element.bonuses != null) {
@@ -179,7 +179,7 @@ class DotaHero {
       maxMana: json["max_mana"],
       manaRegen: json["mana_regen"].toDouble(),
       abilities: abilit,
-      talents: List<Ability>.from(json["talents"].map((x) => Ability.fromJson(x, listAllBonuses,true))),
+      //talents: List<Ability>.from(json["talents"].map((x) => Ability.fromJson(x, listAllBonuses.isEmpty ? null : listAllBonuses,true))),
     );
   }
 
@@ -217,7 +217,7 @@ class DotaHero {
         "max_mana": maxMana,
         "mana_regen": manaRegen,
         "abilities": List<dynamic>.from(abilities.map((x) => x.toJson())),
-        "talents": List<dynamic>.from(talents.map((x) => x.toJson())),
+        //"talents": List<dynamic>.from(talents.map((x) => x.toJson())),
       };
 }
 

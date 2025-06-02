@@ -3,14 +3,14 @@ import 'package:new_project/data/models/heroesResponseDTO.dart';
 import 'package:new_project/presentation/allHeroesPage/bloc/heroes_event.dart';
 import 'package:new_project/presentation/allHeroesPage/bloc/heroes_state.dart';
 import 'package:new_project/presentation/form_submission_status.dart';
-import '../../../data/repository/dota_repository.dart';
+import 'package:new_project/data/repository/dota_repository.dart';
 
 class HeroBloc extends Bloc<HeroEvent, HeroState> {
-  final DotaRepository? dotaRepository;
+  final DotaRepository dotaRepository;
 
   List<Heroes>? listAllHero = null;
 
-  HeroBloc({this.dotaRepository}) : super(HeroState(heroList: [])) {
+  HeroBloc({required this.dotaRepository}) : super(HeroState(heroList: [])) {
     on<LoadAllHeroes>((event, emit) async {
 
       if(listAllHero != null){
