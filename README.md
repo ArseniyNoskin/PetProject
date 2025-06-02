@@ -12,7 +12,6 @@
       <img src="data/searchHeroList.jpg" width="20%"/>
       <img src="data/heroInfo.jpg" width="20%"/>
       <img src="data/abilityInfo.jpg" width="20%"/>
-      <img src="data/talentsTree.jpg" width="20%"/>
     </p>
 
 
